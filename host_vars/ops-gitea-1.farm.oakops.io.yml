@@ -1,0 +1,24 @@
+ansible_user: root
+
+
+# Docker related
+pip_install_packages:
+  - name: docker
+  - name: docker-compose
+
+# Gitea
+gitea_version: 1.8.0
+gitea_user: 1008
+gitea_group: 1008
+gitea_app_volume: /mnt/gitea/app
+gitea_app_remote_volume: 172.21.14.36:/mnt/POOL_A/gitea/app
+gitea_ssh_port: 222
+gitea_http_port: 3000
+
+# DB
+postgres_version: 11.2
+gitea_db_user: "{{ lookup('onepassword', 'ops-gitea-1', section='db', field='username', vault='homelab') }}"
+gitea_db_pass: "{{ lookup('onepassword', 'ops-gitea-1', section='db', field='password', vault='homelab') }}"
+gitea_db_name: gitea
+gitea_db_volume: /mnt/gitea/db
+gitea_db_remote_volume: 172.21.14.36:/mnt/POOL_A/gitea/db
